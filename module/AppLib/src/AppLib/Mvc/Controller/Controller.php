@@ -8,13 +8,13 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Application\Controller;
+namespace AppLib\Mvc\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Authentication\AuthenticationService;
 use Doctrine\ORM\EntityManager;
 
-class MainController extends AbstractActionController {
+class Controller extends AbstractActionController {
 
     /**
      * @var AuthManager
