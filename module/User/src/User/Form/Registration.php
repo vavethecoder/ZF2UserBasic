@@ -4,9 +4,9 @@ namespace User\Form;
 
 use Zend\InputFilter\InputFilter;
 use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
-use Application\Form\MainForm;
+use AppLib\Form\Form;
 
-class Registration extends MainForm {
+class Registration extends Form {
 
     public function __construct() {
         parent::__construct('registration');

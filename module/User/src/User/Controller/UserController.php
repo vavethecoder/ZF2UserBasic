@@ -11,12 +11,12 @@
 namespace User\Controller;
 
 use Zend\View\Model\ViewModel;
-use Application\Controller\MainController;
+use AppLib\Mvc\Controller\Controller;
 use User\Form\User as UserForm;
-use User\Form\Registration as UserRegForm;
+use User\Form\Registration as UserRegistrationForm;
 use Application\Entity\User as UserEntity;
 
-class UserController extends MainController {
+class UserController extends Controller {
 
     public function loginAction() {
         $userForm = new UserForm();
@@ -56,7 +56,7 @@ class UserController extends MainController {
     }
 
     public function registrationAction() {
-        $userRegForm = new UserRegForm();
+        $userRegForm = new UserRegistrationForm();
         $userEntity = new UserEntity();
         $userRegForm->bind($userEntity);
         $userRegForm->get('submit')->setValue('Sign Up');

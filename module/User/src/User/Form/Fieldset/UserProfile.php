@@ -1,13 +1,12 @@
 <?php
 
-namespace User\FormFieldset;
+namespace User\Form\Fieldset;
 
-use Zend\Form\Fieldset;
-use Zend\InputFilter\InputFilterProviderInterface;
+use AppLib\Form\Fieldset;
 use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
 use Application\Entity\UserProfile;
 
-class UserProfileFieldset extends Fieldset implements InputFilterProviderInterface {
+class UserProfile extends Fieldset implements InputFilterProviderInterface {
 
     public function __construct() {
         parent::__construct('user-profile');

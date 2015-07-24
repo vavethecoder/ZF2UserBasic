@@ -1,13 +1,12 @@
 <?php
 
-namespace User\FormFieldset;
+namespace User\Form\Fieldset;
 
-use Zend\Form\Fieldset;
-use Zend\InputFilter\InputFilterProviderInterface;
+use AppLib\Form\Fieldset;
 use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
 use Application\Entity\Role;
 
-class RoleFieldset extends Fieldset implements InputFilterProviderInterface {
+class Role extends Fieldset implements InputFilterProviderInterface {
 
     public function __construct() {
         parent::__construct('role');
