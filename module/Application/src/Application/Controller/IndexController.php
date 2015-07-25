@@ -10,8 +10,8 @@
 
 namespace Application\Controller;
 
-use AppLib\Mvc\Controller\Controller;
 use Zend\View\Model\ViewModel;
+use AppLib\Mvc\Controller\Controller;
 
 class IndexController extends Controller {
 

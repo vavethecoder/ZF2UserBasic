@@ -2,13 +2,13 @@
 
 namespace AppLib\Form;
 
-use Zend\Form\Fieldset;
+use Zend\Form\Fieldset as ZendFieldset;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Doctrine\ORM\EntityManager;
 
-class Fieldset extends Fieldset implements InputFilterProviderInterface, ServiceLocatorAwareInterface {
+class Fieldset extends ZendFieldset implements InputFilterProviderInterface, ServiceLocatorAwareInterface {
 	
 	protected $serviceLocator;
 	protected $authManager;

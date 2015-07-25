@@ -2,9 +2,10 @@
 
 namespace User\Form\Fieldset;
 
-use AppLib\Form\Fieldset;
+use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
-use Application\Entity\UserProfile;
+use AppLib\Form\Fieldset;
+use Application\Entity\UserProfile as UserProfileEntity;
 
 class UserProfile extends Fieldset implements InputFilterProviderInterface {
 
@@ -12,7 +13,7 @@ class UserProfile extends Fieldset implements InputFilterProviderInterface {
         parent::__construct('user-profile');
 
         $this->setHydrator(new ClassMethodsHydrator(false))
-                ->setObject(new UserProfile());
+                ->setObject(new UserProfileEntity());
 
         $this->add(array(
             'name' => 'user-profile-id',            

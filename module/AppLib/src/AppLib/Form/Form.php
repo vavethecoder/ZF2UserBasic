@@ -2,9 +2,9 @@
 
 namespace AppLib\Form;
 
-use Zend\Form\Form;
+use Zend\Form\Form as ZendForm;
 
-class Form extends Form {
+class Form extends ZendForm {
 
     public function __construct() {
         parent::__construct();

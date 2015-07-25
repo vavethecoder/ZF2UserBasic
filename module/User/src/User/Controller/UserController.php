@@ -12,9 +12,9 @@ namespace User\Controller;
 
 use Zend\View\Model\ViewModel;
 use AppLib\Mvc\Controller\Controller;
+use Application\Entity\User as UserEntity;
 use User\Form\User as UserForm;
 use User\Form\Registration as UserRegistrationForm;
-use Application\Entity\User as UserEntity;
 
 class UserController extends Controller {
 

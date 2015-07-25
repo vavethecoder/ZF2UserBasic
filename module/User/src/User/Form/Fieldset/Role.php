@@ -2,9 +2,10 @@
 
 namespace User\Form\Fieldset;
 
-use AppLib\Form\Fieldset;
+use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
-use Application\Entity\Role;
+use AppLib\Form\Fieldset;
+use Application\Entity\Role as RoleEntity;
 
 class Role extends Fieldset implements InputFilterProviderInterface {
 
@@ -12,7 +13,7 @@ class Role extends Fieldset implements InputFilterProviderInterface {
         parent::__construct('role');
 
         $this->setHydrator(new ClassMethodsHydrator(false))
-                ->setObject(new Role());
+                ->setObject(new RoleEntity());
 
         $this->add(array(
             'name' => 'role-id',
