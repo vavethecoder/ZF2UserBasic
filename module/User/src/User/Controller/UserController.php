@@ -119,5 +119,14 @@ class UserController extends Controller {
             'messages' => $this->flashmessenger()->getMessages(),
         ));
     }
+    
+    public function listAction() {
+        $entityManager = $this->getEntityManager();
+        $users = $entityManager->getRepository('Application\Entity\User')->findAll();
+        
+        return new ViewModel(array(
+            'users' => $users,
+        ));
+    }
 
 }
