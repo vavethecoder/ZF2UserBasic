@@ -1,6 +1,5 @@
 <?php
-    $formUser->setAttribute('action', $this->url('user', array('action' => 'login')))->prepare();
-    $user = $formUser->get('user');
+    $user = $userForm->get('user');
 ?>
 
 <div class="modal-header">
@@ -8,19 +7,17 @@
     <h1 class="text-center">Login</h1>
 </div>
 <div class="modal-body">
-    <?php echo $this->form()->openTag($formUser); ?>
-        <div class="form-group">
-            <?php 
-                if ($this->messages){
-                    echo '<ul>';
-                    foreach($this->messages as $message)
-                    {
-                        echo '<li>'.$message.'</li>';
-                    }
-                    echo '</ul>';
+    <?php echo $this->form()->openTag($userForm); ?>
+        <?php 
+            if ($this->messages){
+                echo '<div class="form-group"><ul>';
+                foreach($this->messages as $message)
+                {
+                    echo '<li>'.$message.'</li>';
                 }
-            ?>
-        </div>
+                echo '</div></ul>';
+            }
+        ?>
         <div class="form-group">
             <?php echo $this->formElement($user->get('email')); ?>
         </div>
@@ -29,8 +26,8 @@
         </div>
         <div class="form-group">
             <?php
-            echo $this->formHidden($formUser->get('csrf'));
-            echo $this->formElement($formUser->get('submit'));
+            echo $this->formHidden($userForm->get('csrf'));
+            echo $this->formElement($userForm->get('submit'));
             ?>
         </div>
     <?php echo $this->form()->closeTag(); ?>

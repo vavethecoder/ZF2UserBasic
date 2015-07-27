@@ -4,7 +4,7 @@ namespace User\Form\Fieldset;
 
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
-use AppLib\Form\Fieldset;
+use Zend\Form\Fieldset;
 use Application\Entity\User as UserEntity;
 
 class User extends Fieldset implements InputFilterProviderInterface {

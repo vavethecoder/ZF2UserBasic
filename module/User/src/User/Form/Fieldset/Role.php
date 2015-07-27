@@ -4,13 +4,13 @@ namespace User\Form\Fieldset;
 
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
-use AppLib\Form\Fieldset;
+use Zend\Form\Fieldset;
 use Application\Entity\Role as RoleEntity;
 
 class Role extends Fieldset implements InputFilterProviderInterface {
 
-    public function __construct() {
-        parent::__construct('role');
+    public function __construct($entityManager) {
+        parent::__construct('roles');
 
         $this->setHydrator(new ClassMethodsHydrator(false))
                 ->setObject(new RoleEntity());
@@ -45,17 +45,15 @@ class Role extends Fieldset implements InputFilterProviderInterface {
         ));
 
         $this->add(array(
-            'name' => 'role-select',
+            'name' => 'roles',
             'type' => 'DoctrineModule\Form\Element\ObjectSelect',
             'options' => array(
                 'label' => 'Role',
-                //'object_manager' => $this->getE,
+                'object_manager' => $entityManager,
                 'target_class' => 'Application\Entity\Role',
                 'property' => 'role',
-                'is_method' => true,
-                'find_method' => array(
-                    'name' => 'getRole',
-                ),
+                'display_empty_item' => true,
+                'empty_item_label' => 'Select Role',
             ),
             'attributes' => array(
                 'class' => 'form-control input-lg',
@@ -74,6 +72,9 @@ class Role extends Fieldset implements InputFilterProviderInterface {
             ),
             'description' => array(
                 'required' => FALSE,
+            ),
+            'roles' => array(
+                'required' => TRUE,
             ),
         );
     }

@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Role
  *
  * @ORM\Table(name="role")
- * @ORM\Entity(repositoryClass="Application\Repository\RoleRepository")
+ * @ORM\Entity
  */
 class Role
 {
@@ -138,9 +138,9 @@ class Role
      *
      * @return Role
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt()
     {
-        $this->createdAt = $createdAt;
+        $this->createdAt = new \DateTime();
 
         return $this;
     }
@@ -162,9 +162,9 @@ class Role
      *
      * @return Role
      */
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt()
     {
-        $this->updatedAt = $updatedAt;
+        $this->updatedAt = new \DateTime();
 
         return $this;
     }
@@ -188,9 +188,11 @@ class Role
      */
     public function addUser(\Application\Entity\User $user)
     {
-        $this->user[] = $user;
-
-        return $this;
+        if ($this->user->contains($user)) {
+            return;
+        }
+        $this->user->add($user);
+        $user->addRole($this);
     }
 
     /**
@@ -200,7 +202,11 @@ class Role
      */
     public function removeUser(\Application\Entity\User $user)
     {
+        if (!$this->user->contains($user)) {
+            return;
+        }
         $this->user->removeElement($user);
+        $user->removeUser($this);
     }
 
     /**

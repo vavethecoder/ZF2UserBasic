@@ -10,8 +10,7 @@ return array(
                 'options' => array(
                     'route' => '/user',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'User\Controller',
-                        'controller' => 'User',
+                        'controller' => 'User\Controller\User',
                         'action' => 'login',
                     ),
                 ),
@@ -32,8 +31,6 @@ return array(
                 ),
             ),
         ),
-    ),
-    'service_manager' => array(
     ),
     'controllers' => array(
         'invokables' => array(

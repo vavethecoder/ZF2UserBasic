@@ -108,7 +108,7 @@ class User
      */
     public function setPassword($password)
     {
-        $this->password = $password;
+        $this->password = md5($password);
 
         return $this;
     }
@@ -130,9 +130,9 @@ class User
      *
      * @return User
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt()
     {
-        $this->createdAt = $createdAt;
+        $this->createdAt = new \DateTime();
 
         return $this;
     }
@@ -154,9 +154,9 @@ class User
      *
      * @return User
      */
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt()
     {
-        $this->updatedAt = $updatedAt;
+        $this->updatedAt = new \DateTime();
 
         return $this;
     }
@@ -180,9 +180,10 @@ class User
      */
     public function addRole(\Application\Entity\Role $role)
     {
-        $this->role[] = $role;
-
-        return $this;
+        if ($this->role->contains($role)) {
+            return;
+        }
+        $this->role->add($role);
     }
 
     /**
@@ -192,6 +193,9 @@ class User
      */
     public function removeRole(\Application\Entity\Role $role)
     {
+        if (!$this->role->contains($role)) {
+            return;
+        }
         $this->role->removeElement($role);
     }
 
