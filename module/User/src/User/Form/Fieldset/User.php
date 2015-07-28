@@ -3,16 +3,17 @@
 namespace User\Form\Fieldset;
 
 use Zend\InputFilter\InputFilterProviderInterface;
-use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
+use Doctrine\Common\Persistence\ObjectManager;
+use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 use Zend\Form\Fieldset;
 use Application\Entity\User as UserEntity;
 
 class User extends Fieldset implements InputFilterProviderInterface {
 
-    public function __construct() {
+    public function __construct(ObjectManager $objectManager = NULL) {
         parent::__construct('user');
 
-        $this->setHydrator(new ClassMethodsHydrator(false))
+        $this->setHydrator(new DoctrineHydrator($objectManager))
                 ->setObject(new UserEntity());
 
         $this->add(array(

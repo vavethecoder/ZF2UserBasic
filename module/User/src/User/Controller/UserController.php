@@ -76,14 +76,14 @@ class UserController extends Controller {
                 'userRegForm' => $userRegForm,
             ));
         }
-        
+
         $entityManager = $this->getEntityManager();
-        
+
         $email = $entityManager->getRepository('Application\Entity\User')->findOneByEmail($userFormData['user']['email']);
-        
-        if(!empty($email)) {
+
+        if (!empty($email)) {
             $this->flashmessenger()->addMessage('Email already exist.');
-            
+
             return new ViewModel(array(
                 'userRegForm' => $userRegForm,
                 'messages' => $this->flashmessenger()->getMessages(),
@@ -95,7 +95,7 @@ class UserController extends Controller {
         $userEntity->setPassword($userFormData['user']['password']);
         $userEntity->setCreatedAt();
         $userEntity->setUpdatedAt();
-        $userEntity->addRole($entityManager->getRepository('Application\Entity\Role')->findOneById($userFormData['roles']['roles']));        
+        $userEntity->addRole($entityManager->getRepository('Application\Entity\Role')->findOneById($userFormData['roles']['roles']));
         $entityManager->persist($userEntity);
         $entityManager->flush();
 
@@ -109,23 +109,41 @@ class UserController extends Controller {
         $userProfileEntity->setCreatedAt();
         $userProfileEntity->setUpdatedAt();
         $entityManager->persist($userProfileEntity);
-        
+
         $entityManager->flush();
         $entityManager->clear();
-        
+
 
         return new ViewModel(array(
             'userRegForm' => $userRegForm,
             'messages' => $this->flashmessenger()->getMessages(),
         ));
     }
-    
+
     public function listAction() {
         $entityManager = $this->getEntityManager();
         $users = $entityManager->getRepository('Application\Entity\User')->findAll();
-        
+
         return new ViewModel(array(
             'users' => $users,
+        ));
+    }
+
+    public function updateAction() {
+        $userId = $this->params('id');
+
+        $entityManager = $this->getEntityManager();
+        $user = $entityManager->getRepository('Application\Entity\User')->findOneById($userId);
+        $userProfile = $entityManager->getRepository('Application\Entity\UserProfile')->findOneByUser($user);
+
+        $userForm = new UserRegistrationForm($entityManager);
+        $userForm->bind($userProfile);
+        $userForm->getInputFilter()->remove('roles');
+        $userForm->get('submit')->setValue('Update');
+        $userForm->setAttribute('action', '/user/update')->prepare();
+
+        return new ViewModel(array(
+            'userForm' => $userForm,
         ));
     }
 

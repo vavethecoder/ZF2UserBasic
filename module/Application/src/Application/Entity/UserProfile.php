@@ -73,7 +73,7 @@ class UserProfile
     /**
      * @var \Application\Entity\User
      *
-     * @ORM\OneToOne(targetEntity="Application\Entity\User", inversedBy="profile")
+     * @ORM\OneToOne(targetEntity="Application\Entity\User")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      * })

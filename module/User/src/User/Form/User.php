@@ -3,16 +3,17 @@
 namespace User\Form;
 
 use Zend\InputFilter\InputFilter;
-use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
+use Doctrine\Common\Persistence\ObjectManager;
+use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 use AppLib\Form\Form;
 
 class User extends Form {
 
-    public function __construct() {
+    public function __construct(ObjectManager $objectManager = NULL) {
         parent::__construct('user');
 
         $this->setAttribute('method', 'post')
-                ->setHydrator(new ClassMethodsHydrator(false))
+                ->setHydrator(new DoctrineHydrator($objectManager))
                 ->setInputFilter(new InputFilter());
 
         $this->add(array(

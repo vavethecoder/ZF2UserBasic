@@ -48,13 +48,6 @@ class User
      * @ORM\Column(name="updated_at", type="datetime", nullable=false)
      */
     private $updatedAt;
-    
-    /**
-     * @var \Application\Entity\UserProfile
-     * 
-     * @ORM\OneToOne(targetEntity="Application\Entity\UserProfile", mappedBy="user")
-     **/
-    private $userProfile;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -176,30 +169,6 @@ class User
     public function getUpdatedAt()
     {
         return $this->updatedAt;
-    }
-
-    /**
-     * Set userProfile
-     *
-     * @param \Application\Entity\UserProfile $userProfile
-     *
-     * @return User
-     */
-    public function setUserProfile(\Application\Entity\UserProfile $userProfile = null)
-    {
-        $this->userProfile = $userProfile;
-
-        return $this;
-    }
-
-    /**
-     * Get userProfile
-     *
-     * @return \Application\Entity\UserProfile
-     */
-    public function getUserProfile()
-    {
-        return $this->userProfile;
     }
 
     /**

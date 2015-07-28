@@ -3,16 +3,17 @@
 namespace User\Form\Fieldset;
 
 use Zend\InputFilter\InputFilterProviderInterface;
-use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
+use Doctrine\Common\Persistence\ObjectManager;
+use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 use Zend\Form\Fieldset;
 use Application\Entity\UserProfile as UserProfileEntity;
 
 class UserProfile extends Fieldset implements InputFilterProviderInterface {
 
-    public function __construct() {
-        parent::__construct('profile');
+    public function __construct(ObjectManager $objectManager = NULL) {
+        parent::__construct('user-profile');
 
-        $this->setHydrator(new ClassMethodsHydrator(false))
+        $this->setHydrator(new DoctrineHydrator($objectManager))
                 ->setObject(new UserProfileEntity());
 
         $this->add(array(
@@ -26,7 +27,7 @@ class UserProfile extends Fieldset implements InputFilterProviderInterface {
         ));
 
         $this->add(array(
-            'name' => 'firstname',            
+            'name' => 'firstName',            
             'type' => 'Zend\Form\Element\Text',
             'options' => array(
                 'label' => 'First Name',
