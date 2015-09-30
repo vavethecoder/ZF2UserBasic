@@ -1,7 +1,7 @@
 <?php
     $user = $userForm->get('user');
-    $userProfile = $userForm->get('user-profile');
-    $roles = $userForm->get('roles');
+    $userProfile = $user->get('user-profile');
+    $roles = $user->get('role');
 ?>
 
 <div class="modal-header">
@@ -27,10 +27,10 @@
             <?php echo $this->formElement($user->get('password')); ?>
         </div>
         <div class="form-group">
-            <?php echo $this->formElement($userProfile->get('firstName')); ?>
+            <?php echo $this->formElement($userProfile->get('first-name')); ?>
         </div>
         <div class="form-group">
-            <?php echo $this->formElement($userProfile->get('lastname')); ?>
+            <?php echo $this->formElement($userProfile->get('last-name')); ?>
         </div>
         <div class="form-group">
             <?php echo $this->formElement($userProfile->get('birthdate')); ?>
@@ -42,7 +42,7 @@
             <?php echo $this->formElement($userProfile->get('website')); ?>
         </div>
         <div class="form-group">
-            <?php echo $this->formElement($roles->get('roles')); ?>
+            <?php echo $this->formElement($roles); ?>
         </div>
         <div class="form-group">
             <?php

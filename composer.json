@@ -13,5 +13,7 @@
         "doctrine/doctrine-orm-module": "0.9.1"
     },
     "require-dev": {
+        "zendframework/zftool": "dev-master",
+        "zendframework/zend-developer-tools": "dev-master"
     }
 }

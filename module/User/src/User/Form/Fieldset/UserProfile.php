@@ -2,11 +2,11 @@
 
 namespace User\Form\Fieldset;
 
+use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
-use Zend\Form\Fieldset;
 use Application\Entity\UserProfile as UserProfileEntity;
+use AppLib\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 
 class UserProfile extends Fieldset implements InputFilterProviderInterface {
 
@@ -27,7 +27,7 @@ class UserProfile extends Fieldset implements InputFilterProviderInterface {
         ));
 
         $this->add(array(
-            'name' => 'firstName',            
+            'name' => 'first-name',            
             'type' => 'Zend\Form\Element\Text',
             'options' => array(
                 'label' => 'First Name',
@@ -40,7 +40,7 @@ class UserProfile extends Fieldset implements InputFilterProviderInterface {
         ));
 
         $this->add(array(
-            'name' => 'lastname',
+            'name' => 'last-name',
             'type' => 'Zend\Form\Element\Text',
             'options' => array(
                 'label' => 'Last Name',

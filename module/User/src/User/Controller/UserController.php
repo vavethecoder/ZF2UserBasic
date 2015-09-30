@@ -134,11 +134,10 @@ class UserController extends Controller {
 
         $entityManager = $this->getEntityManager();
         $user = $entityManager->getRepository('Application\Entity\User')->findOneById($userId);
-        $userProfile = $entityManager->getRepository('Application\Entity\UserProfile')->findOneByUser($user);
 
         $userForm = new UserRegistrationForm($entityManager);
-        $userForm->bind($userProfile);
-        $userForm->getInputFilter()->remove('roles');
+        $userForm->bind($user);
+        $userForm->getInputFilter()->remove('role');
         $userForm->get('submit')->setValue('Update');
         $userForm->setAttribute('action', '/user/update')->prepare();
 

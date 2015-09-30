@@ -4,11 +4,9 @@ namespace User\Form;
 
 use Zend\InputFilter\InputFilter;
 use Doctrine\Common\Persistence\ObjectManager;
-use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 use AppLib\Form\Form;
+use AppLib\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 use User\Form\Fieldset\User as UserFieldset;
-use User\Form\Fieldset\Role as RoleFieldset;
-use User\Form\Fieldset\UserProfile as UserProfileFieldset;
 
 class Registration extends Form {
 
@@ -21,16 +19,8 @@ class Registration extends Form {
 
         $userFieldset = new UserFieldset($objectManager);
         $userFieldset->setUseAsBaseFieldset(true);
-        
-        $roleFieldset = new RoleFieldset($objectManager);
-        $roleFieldset->setUseAsBaseFieldset(true);
-        
-        $userProfileFieldset = new UserProfileFieldset($objectManager);
-        $userProfileFieldset->setUseAsBaseFieldset(true);
 
         $this->add($userFieldset);
-        $this->add($roleFieldset);
-        $this->add($userProfileFieldset);
     }
 
 }

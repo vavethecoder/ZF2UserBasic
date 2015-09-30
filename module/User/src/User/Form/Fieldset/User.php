@@ -2,11 +2,11 @@
 
 namespace User\Form\Fieldset;
 
+use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
-use Zend\Form\Fieldset;
 use Application\Entity\User as UserEntity;
+use AppLib\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 
 class User extends Fieldset implements InputFilterProviderInterface {
 
@@ -17,12 +17,12 @@ class User extends Fieldset implements InputFilterProviderInterface {
                 ->setObject(new UserEntity());
 
         $this->add(array(
-            'name' => 'user-id',            
+            'name' => 'user-id',
             'type' => 'Zend\Form\Element\Hidden',
         ));
 
         $this->add(array(
-            'name' => 'email',            
+            'name' => 'email',
             'type' => 'Zend\Form\Element\Email',
             'options' => array(
                 'label' => 'Email',
@@ -44,6 +44,27 @@ class User extends Fieldset implements InputFilterProviderInterface {
                 'class' => 'form-control input-lg',
                 'required' => 'required',
                 'placeholder' => 'Password',
+            ),
+        ));
+        
+        $userProfile = new \User\Form\Fieldset\UserProfile($objectManager);
+        $userProfile->setName('user-profile');
+        $this->add($userProfile);
+
+        $this->add(array(
+            'name' => 'role',
+            'type' => 'DoctrineModule\Form\Element\ObjectMultiCheckbox',
+            'options' => array(
+                'label' => 'Role',
+                'object_manager' => $objectManager,
+                'target_class' => 'Application\Entity\Role',
+                'property' => 'role',
+                'display_empty_item' => true,
+                'empty_item_label' => 'Select Role',
+            ),
+            'attributes' => array(
+                'class' => 'form-control input-lg',
+                'multiple' => 'multiple',
             ),
         ));
     }

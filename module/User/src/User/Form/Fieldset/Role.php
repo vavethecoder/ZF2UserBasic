@@ -2,16 +2,16 @@
 
 namespace User\Form\Fieldset;
 
+use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
-use Zend\Form\Fieldset;
 use Application\Entity\Role as RoleEntity;
+use AppLib\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 
 class Role extends Fieldset implements InputFilterProviderInterface {
 
-    public function __construct(ObjectManager $objectManager) {
-        parent::__construct('roles');
+    public function __construct(ObjectManager $objectManager = NULL) {
+        parent::__construct('role');
 
         $this->setHydrator(new DoctrineHydrator($objectManager))
                 ->setObject(new RoleEntity());
@@ -42,22 +42,6 @@ class Role extends Fieldset implements InputFilterProviderInterface {
             'attributes' => array(
                 'class' => 'form-control input-lg',
                 'required' => 'required',
-            ),
-        ));
-
-        $this->add(array(
-            'name' => 'roles',
-            'type' => 'DoctrineModule\Form\Element\ObjectSelect',
-            'options' => array(
-                'label' => 'Role',
-                'object_manager' => $objectManager,
-                'target_class' => 'Application\Entity\Role',
-                'property' => 'role',
-                'display_empty_item' => true,
-                'empty_item_label' => 'Select Role',
-            ),
-            'attributes' => array(
-                'class' => 'form-control input-lg',
             ),
         ));
     }
